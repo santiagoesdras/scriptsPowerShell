@@ -1,3 +1,5 @@
+#Script para instalar programas offline#
+
 # Ejecutar como administrador
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Start-Process powershell.exe "-File `"$PSCommandPath`"" -Verb RunAs
@@ -19,7 +21,7 @@ catch {
 
 try {
     # Instalar programas locales (ESET y SQL)
-    $instaladores = @("ESET.exe", "SQL1.msi", "SQL2.msi")
+    $instaladores = @("SQL1.msi", "SQL2.msi", "ESET.exe")
 
     foreach ($instalador in $instaladores) {
         $filePath = "$scriptPath\$instalador"

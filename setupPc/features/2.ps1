@@ -1,3 +1,5 @@
+#Script para cambiar parametros de energia#
+
 # Ejecutar como administrador
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Start-Process powershell.exe "-File `"$PSCommandPath`"" -Verb RunAs
@@ -8,10 +10,13 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 try {
     powercfg /change disk-timeout-ac 0
+    powercfg /change disk-timeout-dc 0
     Write-Output "Parametros de energia disco duro modificados correctamente"
     powercfg /change standby-timeout-ac 0
+    powercfg /change standby-timeout-dc 0
     Write-Output "Parametros de energia para suspension modificados correctamente"
     powercfg /change hibernate-timeout-ac 0
+    powercfg /change hibernate-timeout-dc 0
     Write-Output "Parametros de energia para hibernacion modificados correctamente"
 }
 catch {

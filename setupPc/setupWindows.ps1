@@ -4,24 +4,18 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     exit
 }
 
-# Obtener ruta del script
-$principalPath = Split-Path -Parent $MyInvocation.MyCommand.Path
-$scriptsPath = "$principalPath\features"
+# Directorio donde están los scripts secundarios
+$scriptFolder = "$PSScriptRoot\features"
 
 # Obtener todos los archivos .ps1 en la carpeta
-$scripts = Get-ChildItem -Path $scriptsPath -Filter "*.ps1"
+$scripts = Get-ChildItem -Path $scriptFolder -Filter "*.ps1"
 
-# Ejecutar cada script en un trabajo en segundo plano (simultáneo)
-$jobs = @()
+# Ejecutar cada script uno por uno (secuencialmente)
 foreach ($script in $scripts) {
-    $job = Start-Job -ScriptBlock { param($path) & $path } -ArgumentList "$scriptFolder\$($script.Name)"
-    $jobs += $job
+    Write-Host "Ejecutando: $($script.Name)"
+    & "$scriptFolder\$($script.Name)"
+    Write-Host "Finalizado: $($script.Name)`n"
 }
-
-# Esperar a que todos los trabajos terminen antes de continuar
-Write-Host "Esperando a que todos los scripts finalicen..."
-$jobs | ForEach-Object { Receive-Job -Job $_ -Wait -AutoRemoveJob }
-
 Write-Host "Todos los scripts han finalizado."
 
 # Esperando confirmacion del usuario para salir
