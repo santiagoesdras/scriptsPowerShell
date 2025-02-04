@@ -15,7 +15,7 @@ foreach ($script in $scripts) {
     Write-Host "Ejecutando: $($script.Name)"
     & "$scriptFolder\$($script.Name)"
     Write-Host "Finalizado: $($script.Name)`n"
-}
+}   
 Write-Host "Todos los scripts han finalizado."
 
 # Esperando confirmacion del usuario para salir

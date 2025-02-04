@@ -19,8 +19,8 @@ catch {
     exit
 }
 
+# Instalar programas locales (ESET y SQL)
 try {
-    # Instalar programas locales (ESET y SQL)
     $instaladores = @("SQL1.msi", "SQL2.msi", "ESET.exe")
 
     foreach ($instalador in $instaladores) {
@@ -41,6 +41,18 @@ try {
 }
 catch {
     Write-Host "❌ Se produjo un error: $_"
+}
+
+# Instalar programas adicionales usando WINGET
+
+    $programsToDownload = @("Adobe.Acrobat.Reader.64-bit", "RARLab.WinRAR", "Mozilla.Firefox", "Google.Chrome")
+try {
+    foreach ($program in $programsToDownload){
+        winget install --id=$program --silent --accept-source-agreements --accept-package-agreements --source winget
+    }
+}
+catch {
+    Write-Host = "Error al instalar programas con winget: $_"
 }
 
 # Evitar cierre automático de la terminal
