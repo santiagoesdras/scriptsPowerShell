@@ -5,7 +5,7 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 }
 
 # Directorio donde están los scripts secundarios
-$scriptFolder = "$PSScriptRoot\features"
+$scriptFolder = "$PSScriptRoot\first"
 
 # Obtener todos los archivos .ps1 en la carpeta
 $scripts = Get-ChildItem -Path $scriptFolder -Filter "*.ps1"
@@ -20,5 +20,10 @@ Write-Host "Todos los scripts han finalizado."
 
 # Esperando confirmacion del usuario para salir
 
-Write-Output "Ejecución Finalizada. Presione Enter para salir..."
-Read-Host
+Write-Output "Ejecución de scripts finalizada"
+
+#Delay de 10 segundos antes de reiniciar la computadora
+Start-Sleep -Seconds 30
+
+#Reinicio automatico de la computadora
+Restart-Computer -Force
