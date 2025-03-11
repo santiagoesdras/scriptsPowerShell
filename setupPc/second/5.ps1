@@ -42,10 +42,10 @@ foreach ($instalador in $instaladores.Keys) {
         try {
             if ($instalador -match "\.msi$") {
                 # Ejecutar archivos MSI con msiexec
-                $process = Start-Process -FilePath "msiexec.exe" -ArgumentList "/i `"$filePath`" $arguments" -Wait -PassThru -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NUL"
+                $process = Start-Process -FilePath "msiexec.exe" -ArgumentList "/i `"$filePath`" $arguments" -Wait -PassThru -NoNewWindow
             } else {
                 # Ejecutar archivos EXE normalmente
-                $process = Start-Process -FilePath $filePath -ArgumentList $arguments -Wait -PassThru -NoNewWindow -RedirectStandardOutput "NUL" -RedirectStandardError "NUL"
+                $process = Start-Process -FilePath $filePath -ArgumentList $arguments -Wait -PassThru -NoNewWindow
             }
             
             # Validar código de salida
