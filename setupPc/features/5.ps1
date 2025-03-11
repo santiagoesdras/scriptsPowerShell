@@ -21,7 +21,7 @@ catch {
 
 # Instalar programas locales (ESET y SQL)
 try {
-    $instaladores = @("SQL1.msi", "SQL2.msi", "ESET.exe")
+    $instaladores = @("SQL1.msi", "SQL2.msi", "ESET.exe", "acrobat_installer.exe", "chrome_installer.msi", "firefox_installer.exe", "winrar_installer.exe")
 
     foreach ($instalador in $instaladores) {
         $filePath = "$scriptPath\$instalador"
