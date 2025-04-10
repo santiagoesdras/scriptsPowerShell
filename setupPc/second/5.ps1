@@ -29,6 +29,7 @@ $instaladores = @{
     "SQL1.msi"                = "/quiet /norestart"
     "SQL2.msi"                = "/quiet /norestart"
     "winrar_installer.exe"     = "/S"
+    "OfficeSetup.exe"        = "/silent /norestart"
 }
 
 # Instalar programas
