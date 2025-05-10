@@ -29,7 +29,7 @@ $instaladores = @{
     "SQL1.msi"                = "/quiet /norestart"
     "SQL2.msi"                = "/quiet /norestart"
     "winrar_installer.exe"     = "/S"
-    "OfficeSetup.exe"        = "/silent /norestart"
+    "OfficeSetup.exe"		= "/configure `"$programsPath/config.xml`""
 }
 
 # Instalar programas
@@ -45,8 +45,13 @@ foreach ($instalador in $instaladores.Keys) {
                 # Ejecutar archivos MSI con msiexec
                 $process = Start-Process -FilePath "msiexec.exe" -ArgumentList "/i `"$filePath`" $arguments" -Wait -PassThru -NoNewWindow
             } else {
-                # Ejecutar archivos EXE normalmente
-                $process = Start-Process -FilePath $filePath -ArgumentList $arguments -Wait -PassThru -NoNewWindow
+		    if($instalador -eq "OfficeSetup.exe"){
+			    $process = Start-Process -FilePath $filePath -ArgumentList $arguments -Wait -PassThru
+			}
+			else{
+                		# Ejecutar archivos EXE normalmente
+                		$process = Start-Process -FilePath $filePath -ArgumentList $arguments -Wait -PassThru -NoNewWindow
+			}
             }
             
             # Validar código de salida
