@@ -22,13 +22,6 @@ catch {
 
 # Lista de instaladores con argumentos específicos para modo silencioso
 $instaladores = @{
-    "acrobat_installer.exe"    = "/sAll /rs /msi /norestart /quiet"
-    "ESET.exe"                = "/silent /norestart"
-    "firefox_installer.exe"    = "-ms"
-    "chrome_installer.msi"     = "/quiet /norestart"
-    "SQL1.msi"                = "/quiet /norestart"
-    "SQL2.msi"                = "/quiet /norestart"
-    "winrar_installer.exe"     = "/S"
     "OfficeSetup.exe"		= "/configure `"$programsPath/config.xml`""
 }
 
@@ -46,12 +39,12 @@ foreach ($instalador in $instaladores.Keys) {
                 $process = Start-Process -FilePath "msiexec.exe" -ArgumentList "/i `"$filePath`" $arguments" -Wait -PassThru -NoNewWindow
             } else {
 		    if($instalador -eq "OfficeSetup.exe"){
-			    $process = Start-Process -FilePath $filePath -ArgumentList $arguments -Wait -PassThru
+			    $process = Start-Process -FilePath $filePath -ArgumentList $arguments -Wait -PassThru 
 			}
 			else{
-                		# Ejecutar archivos EXE normalmente
-                		$process = Start-Process -FilePath $filePath -ArgumentList $arguments -Wait -PassThru -NoNewWindow
-			}
+			    #Ejecutar demas instaladores normalmente
+			    $process = Start-Process -FilePath $filePath -ArgumentList $arguments -Wait -PassThru -NoNewWindow
+		    }
             }
             
             # Validar código de salida
